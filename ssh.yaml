@@ -1,0 +1,25 @@
+---
+- name: setup ssh login
+  hosts: localhost
+  tasks:
+    - name: create ssh key pair
+      user:
+        name: guru
+        generate_ssh_key: yes
+        ssh_key_bits: 2048
+        ssh_key_file: /home/guru/.ssh/id_rsa
+
+- name: upload public key
+  hosts: all
+  tasks:
+    - name: copy key by authorized_key module
+      ansible.posix.authorized_key:
+        user: guru
+        state: present
+        key: "{{ lookup('file', '/home/guru/.ssh/id_rsa.pub') }}"
+
+    - name: change /etc/sudoers
+      ansible.builtin.lineinfile:
+        path: /etc/sudoers
+        regexp: '^%wheel'
+        line: '%wheel  ALL=(ALL)       NOPASSWD: ALL'

@@ -32,19 +32,6 @@ pipeline {
                     def imageFull = "${OPENSHIFT_REGISTRY}/${OPENSHIFT_PROJECT}/spring-app:${params.IMAGE_TAG}"
                     sh """
                         oc project ${OPENSHIFT_PROJECT}
-                        oc start-build spring-app --from-dir=. --follow --build-arg APP_VERSION=A --to-image=${imageFull} || \
-                        docker build -t ${imageFull} . && docker push ${imageFull}
-                    """
-                }
-            }
-        }
-
-        stage('Build & Push OpenShift Image (A version)') {
-            steps {
-                script {
-                    def imageFull = "${OPENSHIFT_REGISTRY}/${OPENSHIFT_PROJECT}/spring-app:${params.IMAGE_TAG}"
-                    sh """
-                        oc project ${OPENSHIFT_PROJECT}
                         oc start-build spring-app --from-dir=. --follow --build-arg APP_VERSION=A
                     """
                 }

@@ -34,7 +34,7 @@ pipeline {
                         oc project ${OPENSHIFT_PROJECT}
                         if ! oc get bc spring-app >/dev/null 2>&1; then
                             echo "BuildConfig spring-app not found. Creating..."
-                            oc new-build --name=spring-app --binary --image-stream=java:17 -n ${OPENSHIFT_PROJECT}
+                            oc new-build --name=spring-app --binary --image-stream=java:latest -n ${OPENSHIFT_PROJECT} --image-stream-namespace=openshift
                             oc patch bc spring-app -p '{"spec":{"output":{"to":{"name":"${imageFull}"}}}}' -n ${OPENSHIFT_PROJECT}
                         else
                             echo "BuildConfig spring-app already exists."

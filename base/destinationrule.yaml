@@ -1,0 +1,14 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: spring-app
+spec:
+  host: spring-app
+  subsets:
+    - name: version-a
+      labels:
+        version: a
+    - name: version-b
+      labels:
+        version: b
+

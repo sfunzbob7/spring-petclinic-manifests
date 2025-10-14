@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-app
+  labels:
+    app: spring-app
+    version: a
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spring-app
+      version: a
+  template:
+    metadata:
+      labels:
+        app: spring-app
+        version: a
+    spec:
+      containers:
+      - name: spring-app
+        image: default-route-openshift-image-registry.apps.kyobo.mtp.local/spring-test/spring-app:a
+        env:
+        - name: APP_VERSION
+          value: "A"
+        ports:
+        - containerPort: 8080
+

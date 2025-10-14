@@ -16,7 +16,7 @@ pipeline {
         GIT_CREDENTIAL_ID = 'spring-test-token'
         VIRTUALSERVICE_FILE = "base/virtualservice.yaml"
         OPENSHIFT_PROJECT = "spring-test"
-        OPENSHIFT_REGISTRY = "default-route-openshift-image-registry.apps.kyobo.mtp.local/spring-test"
+        OPENSHIFT_REGISTRY = "default-route-openshift-image-registry.apps.kyobo.mtp.local"
     }
 
     stages {

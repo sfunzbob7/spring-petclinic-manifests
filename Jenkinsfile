@@ -15,7 +15,7 @@ pipeline {
         ARGOCD_CLI_TOKEN = credentials('admin')
         GIT_CREDENTIAL_ID = 'spring-test-token'
         VIRTUALSERVICE_FILE = "base/virtualservice.yaml"
-        OPENSHIFT_PROJECT = "spring-app"
+        OPENSHIFT_PROJECT = "spring-test"
         OPENSHIFT_REGISTRY = "default-route-openshift-image-registry.apps.kyobo.mtp.local/spring-test"
     }
 
@@ -29,7 +29,7 @@ pipeline {
         stage('Build & Push OpenShift Image (A version)') {
             steps {
                 script {
-                    def imageFull = "${OPENSHIFT_REGISTRY}/${OPENSHIFT_PROJECT}/sample-app:${params.IMAGE_TAG}"
+                    def imageFull = "${OPENSHIFT_REGISTRY}/${OPENSHIFT_PROJECT}/spring-app:${params.IMAGE_TAG}"
                     sh """
                         oc project ${OPENSHIFT_PROJECT}
                         oc start-build spring-app --from-dir=. --follow --build-arg APP_VERSION=A --to-image=${imageFull} || \

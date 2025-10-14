@@ -39,6 +39,18 @@ pipeline {
             }
         }
 
+        stage('Build & Push OpenShift Image (A version)') {
+            steps {
+                script {
+                    def imageFull = "${OPENSHIFT_REGISTRY}/${OPENSHIFT_PROJECT}/spring-app:${params.IMAGE_TAG}"
+                    sh """
+                        oc project ${OPENSHIFT_PROJECT}
+                        oc start-build spring-app --from-dir=. --follow --build-arg APP_VERSION=A
+                    """
+                }
+            }   
+        }
+
         stage('Checkout Manifests Repo') {
             steps {
                 sh "git clone ${GIT_REPO_MANIFESTS}"

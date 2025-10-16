@@ -48,7 +48,9 @@ pipeline {
 
         stage('Checkout Manifests Repo') {
             steps {
-                sh "git clone ${GIT_REPO_MANIFESTS}"
+                git branch: "${GIT_BRANCH_MANIFESTS}",
+                    url: "${GIT_REPO_MANIFESTS}",
+                    credentialsId: "${GIT_CREDENTIAL_ID}"
             }
         }
 

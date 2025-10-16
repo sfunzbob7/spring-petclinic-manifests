@@ -7,7 +7,7 @@ pipeline {
 
     environment {
         GIT_REPO_APP = "https://github.com/sfunzbob7/spring-petclinic.git"
-        GIT_REPO_MANIFESTS = "https://github.com/sfunzbob7/spring-petclinic-manifests.git"i
+        GIT_REPO_MANIFESTS = "https://github.com/sfunzbob7/spring-petclinic-manifests.git"
         GIT_BRANCH = "main"
         GIT_BRANCH_MANIFESTS = "master"
         ARGOCD_APP = "spring-app"

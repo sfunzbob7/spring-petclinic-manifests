@@ -7,7 +7,7 @@ pipeline {
 
     environment {
         GIT_REPO_APP = "https://github.com/sfunzbob7/spring-petclinic.git"
-        GIT_REPO_MANIFESTS = "https://github.com/sfunzbob7/sample-app-manifests.git"
+        GIT_REPO_MANIFESTS = "https://github.com/sfunzbob7/spring-petclinic-manifests.git"i
         GIT_BRANCH = "main"
         GIT_BRANCH_MANIFESTS = "master"
         ARGOCD_APP = "spring-app"
@@ -48,9 +48,7 @@ pipeline {
 
         stage('Checkout Manifests Repo') {
             steps {
-                git branch: "${GIT_BRANCH_MANIFESTS}",
-                    url: "${GIT_REPO_MANIFESTS}",
-                    credentialsId: "${GIT_CREDENTIAL_ID}"
+                git branch: "${GIT_BRANCH_MANIFESTS}", url: "${GIT_REPO_MANIFESTS}", credentialsId: "${GIT_CREDENTIAL_ID}"
             }
         }
 
